@@ -65,7 +65,7 @@
             <hr>
             <div class="row copyrights">
                 <p>
-                    © Copyright 2012 - 2022 | Avada Theme by ThemeFusion | All Rights Reserved | Powered by WordPress
+                    © Copyright 2022 - 2023 | Laravada Theme | All Rights Reserved | Powered by Rail Coder
                     <span>
                         <a href="#"><font-awesome-icon icon="fa-brands fa-instagram" /></a>
                         <a href="#">
