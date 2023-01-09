@@ -312,6 +312,12 @@ nav .btn:hover {
   line-height: 30px;
   margin: 15px 0;
 }
+.outLarge {
+  display: none;
+  @include md {
+    display: inline;
+  }
+}
 .side-bar .content-wrapper ul {
   list-style: none;
   padding: 0;
