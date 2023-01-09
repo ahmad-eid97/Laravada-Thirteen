@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <app-home-intro></app-home-intro>
+    <app-home-intro :slides="slides"></app-home-intro>
     <app-home-features></app-home-features>
     <app-home-banner></app-home-banner>
     <app-home-experience></app-home-experience>
@@ -10,22 +10,33 @@
 </template>
 
 <script>
-import AppHomeFeatures from '../components/home/AppHomeFeatures.vue'
-import AppHomeIntro from '../components/home/AppHomeIntro.vue'
-import AppHomeBanner from '../components/home/AppHomeBanner.vue'
-import AppHomeExperience from '../components/home/AppHomeExperience.vue'
-import AppHomeBanner2 from '../components/home/AppHomeBanner2.vue'
-import AppHomeWhy from '../components/home/AppHomeWhy.vue'
+import AppHomeFeatures from "../components/home/AppHomeFeatures.vue";
+import AppHomeIntro from "../components/home/AppHomeIntro.vue";
+import AppHomeBanner from "../components/home/AppHomeBanner.vue";
+import AppHomeExperience from "../components/home/AppHomeExperience.vue";
+import AppHomeBanner2 from "../components/home/AppHomeBanner2.vue";
+import AppHomeWhy from "../components/home/AppHomeWhy.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     AppHomeIntro,
     AppHomeFeatures,
     AppHomeBanner,
     AppHomeExperience,
     AppHomeBanner2,
-    AppHomeWhy
-  }
-}
+    AppHomeWhy,
+  },
+  async asyncData({ $axios, app }) {
+    const slides = await $axios.get("/sliders", {
+      headers: {
+        "Accept-Language": app.i18n.locale,
+      },
+    });
+
+    return {
+      slides: slides.data.data.sliders,
+    };
+  },
+};
 </script>
