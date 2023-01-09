@@ -25,21 +25,32 @@
         is-nav
       >
         <b-navbar-nav class="align-items-center">
-          <b-nav-item class="active" href="/">Home</b-nav-item>
-          <b-nav-item href="#">Pages</b-nav-item>
-          <b-nav-item href="#">Services</b-nav-item>
-          <b-nav-item href="#">Articles</b-nav-item>
-          <b-nav-item href="#">Shop</b-nav-item>
-          <b-nav-item href="#">Contact</b-nav-item>
-          <a href="#" class="phone">
-            <font-awesome-icon icon="fa-solid fa-phone" />
-            1-001-234-5678
-          </a>
-          <langSwitch></langSwitch>
-          <a href="#" @click="side = !side" class="btn">
-            <font-awesome-icon icon="fa-solid fa-bag-shopping" />
-            <span class="d-lg-none d-block">Side Bar</span>
-          </a>
+          <b-nav-item
+            active-class="active"
+            :to="localePath(`/${item.link}`)"
+            exact
+            v-for="item in $store.state.topMenu"
+            :key="item.id"
+          >
+            <span v-if="!item.child.length">{{ item.label }}</span>
+
+            <b-dropdown
+              :text="item.label"
+              block
+              class="m-2 dropdownBtn"
+              v-if="item.child.length"
+            >
+              <b-dropdown-item
+                v-for="child in item.child"
+                :key="child.id"
+                :to="localePath('/' + child.link)"
+                >{{ child.label }}</b-dropdown-item
+              >
+            </b-dropdown>
+          </b-nav-item>
+          <b-nav-item v-if="$store.state.user" @click="logout" class="outLarge">
+            Logout
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -90,7 +101,7 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
 .scrolled {
   height: 70px;
   min-height: 70px;
@@ -136,6 +147,9 @@ header nav {
   margin: 0 15px;
   justify-content: center;
   transition: all calc(300 * 1ms) cubic-bezier(0.42, 0.01, 0.58, 1);
+  & > .dropdown {
+    display: none;
+  }
 }
 .nav-link {
   color: rgb(17, 24, 28);
@@ -345,6 +359,25 @@ nav .btn:hover {
   }
   .side-bar.opend {
     width: 100%;
+  }
+}
+.dropdownBtn {
+  margin: 0 !important;
+  button {
+    background: none !important;
+    padding: 0 !important;
+    text-transform: none !important;
+    font-size: 1rem !important;
+    font-family: unset !important;
+    font-weight: 400 !important;
+    box-shadow: none !important;
+    border: none !important;
+    min-width: 60px !important;
+    position: relative;
+    margin: 0 !important;
+  }
+  .dropdown-menu {
+    top: 40px !important;
   }
 }
 </style>
