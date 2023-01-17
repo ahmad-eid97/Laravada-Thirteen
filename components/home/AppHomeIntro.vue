@@ -93,7 +93,7 @@ export default {
   padding: 180px 30px 60px;
   background-color: rgb(15, 27, 45);
   position: relative;
-  height: 750px !important;
+  height: 650px !important;
 }
 .intro .overlay {
   background-image: url("https://the7.io/consulting/wp-content/uploads/sites/67/2020/05/wicked-bg-the7-5.svg");

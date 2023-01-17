@@ -5,19 +5,24 @@
         <img src="/assets/logo2.png" alt="logoImage" style="width: 200px" />
       </b-navbar-brand>
 
-      <b-navbar-toggle target="navbar-toggle-collapse">
-        <template #default="{ expanded }">
-          <span
-            class="menu-trigger"
-            :class="expanded ? 'active' : ''"
-            id="menu03"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </template>
-      </b-navbar-toggle>
+      <div class="d-flex align-items-center">
+        <div class="smallScr">
+          <langSwitch />
+        </div>
+        <b-navbar-toggle target="navbar-toggle-collapse">
+          <template #default="{ expanded }">
+            <span
+              class="menu-trigger"
+              :class="expanded ? 'active' : ''"
+              id="menu03"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </template>
+        </b-navbar-toggle>
+      </div>
 
       <b-collapse
         id="navbar-toggle-collapse"
@@ -53,6 +58,9 @@
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
+      <div class="largeScr">
+        <langSwitch />
+      </div>
     </b-navbar>
     <div
       :class="side ? 'opend' : ''"
@@ -119,14 +127,18 @@ header {
   right: 0;
   padding-right: 60px;
   padding-left: 60px;
-  min-height: 80px;
+  height: 80px;
   background-color: #fff;
   z-index: 9999;
   transition: all 0.3s linear;
+  @include sm {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
 }
 header nav {
-  height: 80px;
-  padding: 0 !important;
+  max-height: 100px;
+  padding: 20px 0 0 0 !important;
   transition: all 0.3s linear;
 }
 .navbar-brand {
@@ -211,7 +223,7 @@ header .phone svg {
   left: 0;
   width: 100%;
   height: 5px;
-  background-color: rgb(98, 57, 189);
+  background-color: var(--main-color);
   border-radius: 4px;
 }
 .menu-trigger span:nth-of-type(1) {
@@ -234,6 +246,18 @@ header .phone svg {
 }
 #menu03.active span:nth-of-type(3) {
   opacity: 0;
+}
+
+.largeScr {
+  @include md {
+    display: none;
+  }
+}
+.smallScr {
+  display: none;
+  @include md {
+    display: block;
+  }
 }
 
 nav .btn {
@@ -336,10 +360,12 @@ nav .btn:hover {
 @media screen and (max-width: 991px) {
   .navbar-collapse.show {
     position: absolute;
-    left: -60px;
-    right: -60px;
+    /* left: -60px;
+    right: -60px; */
     z-index: 9999;
-    top: 120%;
+    top: 146%;
+    width: 100%;
+    /* max-width: 665px; */
   }
   .nav-item {
     width: 100%;
@@ -349,7 +375,7 @@ nav .btn:hover {
 
   .nav-item.active,
   .nav-item:hover {
-    background-color: rgb(98, 57, 189);
+    background-color: var(--main-color);
   }
   .nav-item.active .nav-link,
   .nav-item:hover .nav-link {
@@ -362,9 +388,27 @@ nav .btn:hover {
     font-size: 23px;
     text-align: left;
     color: rgb(97, 106, 125);
+    @include md {
+      &:hover {
+        button {
+          color: #fff !important;
+          opacity: 1;
+        }
+      }
+    }
   }
   .side-bar.opend {
     width: 100%;
+  }
+  .dropdownBtn {
+    button {
+      color: #000 !important;
+      font-size: 1.4rem !important;
+      opacity: 0.8;
+      &:hover {
+        color: #fff !important;
+      }
+    }
   }
 }
 .dropdownBtn {
@@ -373,14 +417,17 @@ nav .btn:hover {
     background: none !important;
     padding: 0 !important;
     text-transform: none !important;
-    font-size: 1rem !important;
+    font-size: 1rem;
     font-family: unset !important;
     font-weight: 400 !important;
     box-shadow: none !important;
     border: none !important;
-    min-width: 60px !important;
+    min-width: unset !important;
+    width: 100%;
+    min-height: 30px;
     position: relative;
     margin: 0 !important;
+    text-align: unset !important;
   }
   .dropdown-menu {
     top: 40px !important;
