@@ -129,7 +129,7 @@ header {
   padding-left: 60px;
   height: 80px;
   background-color: #fff;
-  z-index: 9999;
+  z-index: 999;
   transition: all 0.3s linear;
   @include sm {
     padding-right: 20px;
