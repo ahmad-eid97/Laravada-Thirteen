@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <app-home-intro :slides="slides"></app-home-intro>
+    <app-home-partners :partners="partners" />
     <app-home-features :services="services"></app-home-features>
     <app-home-banner :topBanner="topBanner"></app-home-banner>
     <app-home-experience></app-home-experience>
@@ -20,6 +21,7 @@ import AppHomeBanner2 from "../components/home/AppHomeBanner2.vue";
 import AppHomeWhy from "../components/home/AppHomeWhy.vue";
 import AppHomeActivities from "../components/home/AppHomeActivities.vue";
 import AppHomeSteps from "../components/home/AppHomeSteps.vue";
+import AppHomePartners from "../components/home/AppHomePartners.vue";
 
 export default {
   name: "Home",
@@ -32,6 +34,7 @@ export default {
     AppHomeWhy,
     AppHomeActivities,
     AppHomeSteps,
+    AppHomePartners,
   },
   async asyncData({ $axios, app }) {
     const slides = await $axios.get("/sliders", {
@@ -39,6 +42,8 @@ export default {
         "Accept-Language": app.i18n.locale,
       },
     });
+
+    const partners = await $axios.get("/partners");
 
     const services = await $axios.get("/services");
 
@@ -64,6 +69,7 @@ export default {
 
     return {
       slides: slides.data.data.sliders,
+      partners: partners.data.data.partners,
       services: services.data.data.services,
       topBanner: topBanner.data.data,
       teams: teams.data.data.teams,
