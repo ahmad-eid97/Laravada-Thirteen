@@ -22,6 +22,134 @@
 export default {
   name: "AppHomeBanner",
   props: ["topBanner"],
+  mounted() {
+    document
+      .querySelector(".banner")
+      .style.setProperty(
+        "--bannerTop-bg",
+        this.topBanner.find(
+          (one) => one.key === "banner-top_background_active_section"
+        ).value === "color"
+          ? this.topBanner.find(
+              (one) => one.key === "banner-top_background_color_section"
+            ).value
+          : `url(${
+              this.topBanner.find(
+                (one) => one.key === "banner-top_background_image_section"
+              ).value
+            })`
+      );
+
+    document
+      .querySelector(".banner")
+      .style.setProperty(
+        "--bannerTop-fontSize",
+        `${
+          this.topBanner.find(
+            (one) => one.key === "banner-top_font_size_section"
+          ).value
+        }px`
+      );
+
+    if (
+      this.topBanner.find(
+        (one) => one.key === "banner-top_border_position_section"
+      ) &&
+      this.topBanner.find(
+        (one) => one.key === "banner-top_border_position_section"
+      ).value === "both"
+    ) {
+      document
+        .querySelector(".banner")
+        .style.setProperty(
+          "--bannerTop-border-top",
+          `${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_size_section"
+            ).value
+          }px ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_type_section"
+            ).value
+          } ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_color_section"
+            ).value
+          }`
+        );
+
+      document
+        .querySelector(".banner")
+        .style.setProperty(
+          "--bannerTop-border-bottom",
+          `${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_size_section"
+            ).value
+          }px ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_type_section"
+            ).value
+          } ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_color_section"
+            ).value
+          }`
+        );
+    } else if (
+      this.topBanner.find(
+        (one) => one.key === "banner-top_border_position_section"
+      ) &&
+      this.topBanner.find(
+        (one) => one.key === "banner-top_border_position_section"
+      ).value === "top"
+    ) {
+      document
+        .querySelector(".banner")
+        .style.setProperty(
+          "--bannerTop-border-top",
+          `${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_size_section"
+            ).value
+          }px ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_type_section"
+            ).value
+          } ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_color_section"
+            ).value
+          }`
+        );
+    } else if (
+      this.topBanner.find(
+        (one) => one.key === "banner-top_border_position_section"
+      ) &&
+      this.topBanner.find(
+        (one) => one.key === "banner-top_border_position_section"
+      ).value === "bottom"
+    ) {
+      document
+        .querySelector(".banner")
+        .style.setProperty(
+          "--bannerTop-border-bottom",
+          `${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_size_section"
+            ).value
+          }px ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_type_section"
+            ).value
+          } ${
+            this.topBanner.find(
+              (one) => one.key === "banner-top_border_color_section"
+            ).value
+          }`
+        );
+    }
+  },
 };
 </script>
 
@@ -30,9 +158,23 @@ export default {
   padding: 90px 30px;
   background-color: rgb(15, 27, 45);
   position: relative;
+
+  --bannerTop-bg: #fff;
+  --bannerTop-fontSize: 20px;
+  --bannerTop-border-top: 0px solid #fff;
+  --bannerTop-border-bottom: 0px solid #fff;
+
+  background: var(--bannerTop-bg);
+  border-top: var(--bannerTop-border-top);
+  border-bottom: var(--bannerTop-border-bottom);
+  background-repeat: no-repeat;
+  background-size: cover;
+  h2 {
+    font-size: var(--bannerTop-fontSize);
+  }
 }
 .banner .overlay {
-  background-image: url("https://the7.io/consulting/wp-content/uploads/sites/67/2020/05/wicked-bg-the7-5.svg");
+  /* background-image: url("https://the7.io/consulting/wp-content/uploads/sites/67/2020/05/wicked-bg-the7-5.svg"); */
   background-position-x: 50%;
   background-position-y: 50%;
   background-repeat: no-repeat;
