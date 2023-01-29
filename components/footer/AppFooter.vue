@@ -29,8 +29,8 @@
                 <font-awesome-icon icon="fa-solid fa-phone" />
                 {{
                   $store.state.websiteSettings.find(
-                    (one) => one.key === "email"
-                  ).phone || "No Number"
+                    (one) => one.key === "contact_phone"
+                  ).plain_value || "No Number"
                 }}
               </p>
             </div>
@@ -49,7 +49,7 @@
                 <font-awesome-icon icon="fa-solid fa-building" />
                 {{
                   $store.state.websiteSettings.find(
-                    (one) => one.key === "contact_phone"
+                    (one) => one.key === "contact_address"
                   ).plain_value
                 }}
               </p>
