@@ -5,10 +5,20 @@
     <div class="content">
       <div class="row widgets m-0">
         <div class="col-sm-6 col-md-4 widget">
-          <img src="/assets/logo3.png" alt="logoImage" style="width: 200px" />
+          <img
+            :src="
+              $store.state.websiteSettings.find((one) => one.key === 'logo')
+                .plain_value
+            "
+            alt="logoImage"
+            style="width: 200px"
+          />
           <p>
-            We exist to empower people to deliver ridiculously good innovation
-            to the world’s best companies.
+            {{
+              $store.state.websiteSettings.find(
+                (one) => one.key === "description"
+              ).plain_value
+            }}
           </p>
         </div>
         <div class="col-sm-6 col-md-4 widget">
@@ -22,7 +32,6 @@
                     (one) => one.key === "email"
                   ).phone || "No Number"
                 }}
-                <span>Mon-Sat: 8:00 – 21:00</span>
               </p>
             </div>
             <div class="col-12 p-0 item">
@@ -33,39 +42,46 @@
                     (one) => one.key === "email"
                   ).plain_value
                 }}
-                <span>24/7 customer support</span>
               </p>
             </div>
             <div class="col-12 p-0 item">
               <p>
                 <font-awesome-icon icon="fa-solid fa-building" />
-                3 Rockaway St., New Rochelle, NY 10801
-                <span>Main office location</span>
+                {{
+                  $store.state.websiteSettings.find(
+                    (one) => one.key === "contact_phone"
+                  ).plain_value
+                }}
               </p>
             </div>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 widget">
-          <h5>Recent articles</h5>
-          <div class="row m-0">
-            <div class="col-12 p-0 item">
-              <a>
-                How to find your ideal business advisor
-                <span>March 4, 2020</span>
-              </a>
+          <div class="footer-item">
+            <div class="footer-title">
+              <h5>Useful Links</h5>
             </div>
-            <div class="col-12 p-0 item">
-              <a>
-                Main business consulting trends 21/22
-                <span>February 25, 2020</span>
-              </a>
-            </div>
-            <div class="col-12 p-0 item">
-              <a>
-                Top 6 financial planing tricks
-                <span>February 18, 2020</span>
-              </a>
-            </div>
+            <ul class="footer-list">
+              <!-- <li><a href="#">About Us</a></li> -->
+              <li>
+                <nuxt-link :to="localePath('/about')">About Us</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="localePath('/services')">Services</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="localePath('/team')">Team</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="localePath('/testimonials')">Gallery</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="localePath('/blogs')">Blogs</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link :to="localePath('/contact')">Contact</nuxt-link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -98,7 +114,20 @@ export default {
     return {};
   },
   beforeMount() {},
-  methods: {},
+  methods: {
+    generatePagePath(id) {
+      switch (id) {
+        case 1:
+          return "/about";
+        case 2:
+          return "/contact";
+        case 3:
+          return "/terms";
+        case 4:
+          return "/policy";
+      }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -214,5 +243,16 @@ footer .copyrights span a {
   color: rgba(255, 255, 255, 0.5);
   font-size: 16px;
   margin-left: 16px;
+}
+.footer-list {
+  padding: 0;
+  list-style: none;
+  li {
+    padding: 5px 0;
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
 }
 </style>
