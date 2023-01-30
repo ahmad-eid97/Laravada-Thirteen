@@ -63,23 +63,8 @@
             </div>
             <ul class="footer-list">
               <!-- <li><a href="#">About Us</a></li> -->
-              <li>
-                <nuxt-link :to="localePath('/about')">About Us</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link :to="localePath('/services')">Services</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link :to="localePath('/team')">Team</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link :to="localePath('/testimonials')">Gallery</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link :to="localePath('/blogs')">Blogs</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link :to="localePath('/contact')">Contact</nuxt-link>
+              <li v-for="link in $store.state.usefulLinks" :key="link.id">
+                <a :href="link.url">{{ link.name }}</a>
               </li>
             </ul>
           </div>
