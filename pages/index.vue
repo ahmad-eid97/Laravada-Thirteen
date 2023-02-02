@@ -3,15 +3,15 @@
     <app-home-intro :slides="slides"></app-home-intro>
     <app-home-partners :partners="partners" />
     <app-home-features :services="services"></app-home-features>
-    <div v-if="topBanner.status">
+    <div v-if="$store.state.sectionsStatus['banner-top']">
       <app-home-banner :topBanner="topBanner.data"></app-home-banner>
     </div>
     <app-home-experience></app-home-experience>
     <app-home-banner-2></app-home-banner-2>
-    <div v-if="activities.status">
+    <div v-if="$store.state.sectionsStatus.activities">
       <app-home-activities :activities="activities.data" />
     </div>
-    <div v-if="steps.status">
+    <div v-if="$store.state.sectionsStatus.steps">
       <app-home-steps :steps="steps.data" />
     </div>
     <app-home-why :teams="teams"></app-home-why>
