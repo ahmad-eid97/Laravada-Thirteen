@@ -3,11 +3,17 @@
     <app-home-intro :slides="slides"></app-home-intro>
     <app-home-partners :partners="partners" />
     <app-home-features :services="services"></app-home-features>
-    <app-home-banner :topBanner="topBanner"></app-home-banner>
+    <div v-if="topBanner.status">
+      <app-home-banner :topBanner="topBanner.data"></app-home-banner>
+    </div>
     <app-home-experience></app-home-experience>
     <app-home-banner-2></app-home-banner-2>
-    <app-home-activities :activities="activities" />
-    <app-home-steps :steps="steps" />
+    <div v-if="activities.status">
+      <app-home-activities :activities="activities.data" />
+    </div>
+    <div v-if="steps.status">
+      <app-home-steps :steps="steps.data" />
+    </div>
     <app-home-why :teams="teams"></app-home-why>
     <SocialChat :attendants="attendants">
       <p slot="header">Click one of our representatives below to chat.</p>
@@ -135,10 +141,10 @@ export default {
       slides: slides.data.data.sliders,
       partners: partners.data.data.partners,
       services: services.data.data.services,
-      topBanner: topBanner.data.data,
+      topBanner: topBanner.data,
       teams: teams.data.data.teams,
-      activities: activities.data.data,
-      steps: steps.data.data,
+      activities: activities.data,
+      steps: steps.data,
     };
   },
 };
